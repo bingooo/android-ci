@@ -7,6 +7,10 @@ ENV ANDROID_HOME "/sdk"
 ENV PATH "$PATH:${ANDROID_HOME}/tools"
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get -qq update && apt-get install -y locales \
+	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.UTF-8
+
 RUN apt-get -qq update && \
     apt-get install -qqy --no-install-recommends \
       bzip2 \
